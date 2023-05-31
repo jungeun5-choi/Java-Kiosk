@@ -1,2 +1,4 @@
 public class Kiosk {
+
+    // Controller
 }
