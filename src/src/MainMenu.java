@@ -3,6 +3,10 @@ public class MainMenu {
     protected String name;
     protected String explain;
 
+    MainMenu(){ }
+    MainMenu(String name, String explain) {
+        setter(name, explain);
+    }
 
     public void setter(String name, String explain) {
         this.name = name;
