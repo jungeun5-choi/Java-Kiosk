@@ -15,7 +15,7 @@ public class MenuRepository {
     /* 생성자 */
     MenuRepository() {
 
-        saveInformations();
+        saveInformation();
     }
 
 
@@ -44,7 +44,7 @@ public class MenuRepository {
 
 
     /* 정보 저장 */
-    private void saveInformations() {
+    private void saveInformation() {
 
         MainMenu[] mainMenu = new MainMenu[4];
         for(int i = 0; i < mainMenu.length; i++) { mainMenu[i] = new MainMenu(); }
