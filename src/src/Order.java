@@ -1,9 +1,9 @@
 public class Order {
 
     /* 필드 */
-    MenuRepository menuRepository; // 메인, 상품
-    Cart cart; // 장바구니
-    WaitingNumber waitingNumber; // 대기번호
+    private MenuRepository menuRepository; // 메인, 상품
+    private Cart cart; // 장바구니
+    private WaitingNumber waitingNumber; // 대기번호
 
     float price = 0;
 
@@ -44,5 +44,9 @@ public class Order {
     public MenuRepository getRepo() { return menuRepository; }
     public Cart getCart() { return cart; }
     public WaitingNumber getWaitingNumber() { return  waitingNumber; }
+    public int increaseWaitingNumber() {
+        // 1만큼 증가
+        return waitingNumber.increaseCurrentNumber();
+    }
 
 }

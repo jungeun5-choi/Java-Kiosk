@@ -36,25 +36,62 @@ public class Kiosk {
                 case 2:
                 case 3:
                 {
-                    // ### 상품 메뉴 호출 후,
+                    // ### 1. 상품 메뉴 호출 후,
                     String mainMenuName = order.getRepo().getMainMenuName(selectMain); // 메인메뉴 이름
                     ProductMenu product = screen.viewProductMenu(mainMenuName);
-                    // 반환 값 전달
-                    // ### 장바구니 상품 추가 확인 메세지 출력
+
+                    // ### 2. 장바구니 상품 추가 확인 메세지 출력
                     int selectCart = screen.confirmAddingProductToCart();
-                    // ### 장바구니 추가 선택지 확인 문구 출력
+                    // ### 3. 장바구니 추가 선택지 확인 문구 출력
                     screen.cartSelectionConfirmed(selectCart, product);
+
+                    // ### 4. 장바구니에 물건 추가 (추가한다고 했을 때만)
                     if(selectCart == 0) {
-                        // ### 장바구니에 물건 추가
                         order.addProductToCart(product);
+
+                        // ### 메인으로 돌아가기
                         selectMain = screen.viewMainMenu();
                     }
 
                     break;
                 }
                 case 4: // Order
+                    // ### 장바구니 조회
+                    int selectCart = screen.viewCart();
+
+                    // ### 1. 주문 선택 시
+                    if(selectCart == 0) {
+
+                        // ### 2. 카트 비우기
+                        order.clearCart();
+                        // ### 3. 대기번호 발급
+                        // 대기번호 증가
+                        int wn = order.increaseWaitingNumber();
+                        screen.viewWaitingNumber(wn);
+
+                        // ### 4. 3초 대기
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        // ### 메인으로 돌아가기
+                        selectMain = screen.viewMainMenu();
+                    }
                     break;
+
                 case 5: // Cancel
+                    {
+                        System.out.printf("Cancel\n\n");
+
+                        // ### 메인으로 돌아가기
+                        selectMain = screen.viewMainMenu();
+                    }
+                    break;
+
+                default:
+                    selectMain = screen.viewMainMenu();
                     break;
             }
         }
