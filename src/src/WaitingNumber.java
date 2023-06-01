@@ -1,18 +1,9 @@
 public class WaitingNumber {
 
-    int currentNumber = 0;
-
-    WaitingNumber() {
-        this.currentNumber = 0;
-    }
-
-    public void increaseWaitingNumber() {
-
-        // 1만큼 증가
-        currentNumber += 1;
-    }
+    private int currentNumber = 0;
 
     public int getCurrentNumber() {
         return currentNumber;
     }
+    public int increaseCurrentNumber() { return currentNumber += 1; }
 }
