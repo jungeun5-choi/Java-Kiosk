@@ -34,7 +34,10 @@ public class MenuRepository {
         // key 값에 맞는 List 반환
         return productMenuMap.get(mainMenuName);        
     }
+    public ProductMenu getProduct(String mainMenuName, int index) {
 
+        return productMenuMap.get(mainMenuName).get(index);
+    }
 
 
 
@@ -67,7 +70,7 @@ public class MenuRepository {
         productMenuList.add(productMenu[4]);
 
         productMenuMap.put(mainMenuList.get(0).getName(), productMenuList);
-        productMenuList.clear(); // 저장 후에 비우기
+        productMenu = null; // 저장 후에 비우기
     }
 
 }

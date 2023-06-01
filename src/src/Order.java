@@ -1,43 +1,47 @@
-import java.util.*;
-
 public class Order {
 
     /* 필드 */
-    MenuRepository menuRepository = new MenuRepository(); // 메인, 상품
+    MenuRepository menuRepository; // 메인, 상품
     Cart cart = new Cart(); // 장바구니
     WaitingNumber waitingNumber = new WaitingNumber(); // 대기번호
+
+    float price = 0;
+
+
+    /* 생성자 */
+    Order() {
+        menuRepository = new MenuRepository();
+    }
+    Order(float price) {
+        this.price = price;
+    }
 
 
     /* 메서드 */
 
-    // 1-1. 메인 조회
-    void viewMainMenu(){
+    // 장바구니에 상품 추가
+    public void addProductToCart(ProductMenu productMenu) {
 
-        // 새로운 List 생성
-        List<MainMenu> mainMenus = new ArrayList<>();
-        // repo에서 호출
-        mainMenus = menuRepository.getMainMenuList();
+        // 물건 추가
+        cart.addCurrentCartList(productMenu);
 
-        // 출력
-        for(int i = 0; i < mainMenus.size(); i++) {
-
-            System.out.printf("메뉴 이름: %s, 메뉴 설명: %s\n"
-                    , mainMenus.get(i).getName(), mainMenus.get(i).getExplain());
-        }
-    }
-    // 1-2. 상품 조회
-    void viewProductMenu(){
-
-        // 새로운 List 생성
-        List<ProductMenu> productMenus = new ArrayList<>();
-        // repo에서 호출
-        productMenus = menuRepository.getProductList("");
-
-        // 출력
-
+        // 가격 합산
+        price = cart.setSumPrice(productMenu.getPrice());
     }
 
-    // 2. 장바구니 조회
+    // 장바구니에 비우기
+    public void clearCart() {
 
-    // 3. 대기번호 전달(호출?)
+        // 장바구니 비우기
+        cart.clearCurrentCartList();
+        // 가격 초기화
+        price = cart.clearSumPrice();
+    }
+
+
+    /* getter */
+    public MenuRepository getRepo() { return menuRepository; }
+    public Cart getCart() { return cart; }
+    public WaitingNumber getWaitingNumber() { return  waitingNumber; }
+
 }

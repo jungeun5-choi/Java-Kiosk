@@ -5,36 +5,30 @@ public class Cart {
 
     private List<ProductMenu> currentProductList = new ArrayList<>();
 
-    private int sumPrice = 0;
+    private float sumPrice = 0;
 
 
     /* 메서드 */
-
-    // 장바구니에 상품 추가
-    public void addProductToCart(ProductMenu productMenu) {
-
-        // 물건 추가
-        currentProductList.add(productMenu);
-
-        // 가격 합산
-        sumPrice += productMenu.getPrice();
-    }
-
-    // 장바구니에 비우기
-    public void clearCart() {
-
-        // 장바구니 비우기
-        currentProductList.clear();
-        // 가격 초기화
-        sumPrice = 0;
-    }
-
-
-    // 장바구니 정보 받아오기
-    public List<ProductMenu> getCart() {
+    public List<ProductMenu> getCurrentCartList() {
         return currentProductList;
     }
-    public int getSumPrice() {
+    public List<ProductMenu> addCurrentCartList(ProductMenu productMenu) {
+        currentProductList.add(productMenu);
+        return currentProductList;
+    }
+    public List<ProductMenu> clearCurrentCartList() {
+        currentProductList.clear();
+        return currentProductList;
+    }
+
+    public float getSumPrice() {
+        return sumPrice;
+    }
+    public float setSumPrice(float price) {
+        return sumPrice += price;
+    }
+    public float clearSumPrice() {
+        sumPrice = 0;
         return sumPrice;
     }
 }
