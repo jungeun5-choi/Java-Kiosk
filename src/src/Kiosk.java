@@ -17,12 +17,19 @@ public class Kiosk {
 
     // 키오스크 진입점, 외부에서 호출할 때 사용
     public void startKiosk() {
-        processKiosk();
+
+        //System.out.printf("start Kiosk 진입완료\n");
+        processKiosk(); // 키오스크 실행
     }
 
     // 실제로 돌아가는 키오스크
     private void processKiosk() {
 
+        //System.out.printf("process Kiosk 진입완료\n");
+        while(true){
+
+            
+        }
     }
 
 }

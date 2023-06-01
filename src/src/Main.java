@@ -7,8 +7,16 @@ public class Main {
         Screen screen = new Screen(order);
         Kiosk kiosk = new Kiosk(order, screen);
 
-        // 키오스크 진입
-        kiosk.startKiosk();
+        Runnable task = () -> {
+
+            // 키오스크 진입
+            kiosk.startKiosk();
+        };
+
+        Thread kioskThread = new Thread(task);
+        kioskThread.setName("kioskThread");
+
+        kioskThread.start();
     }
 }
 
