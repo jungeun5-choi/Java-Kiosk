@@ -2,8 +2,11 @@ import java.util.*;
 
 public class Screen {
 
-    private Order order = new Order();
+    private Order order;
 
+    Screen(Order order) {
+        this.order = order;
+    }
 
     // Viewer
 
@@ -14,7 +17,7 @@ public class Screen {
         // 새로운 List 생성
         List<MainMenu> mainMenus = new ArrayList<>();
         // repo에서 호출
-        //mainMenus = menuRepository.getMainMenuList();
+        mainMenus = order.getRepo().getMainMenuList();
 
         // 출력
         for(int i = 0; i < mainMenus.size(); i++) {
@@ -36,7 +39,7 @@ public class Screen {
     }
 
     // 2. 장바구니 조회
-    void viewCart(Order order) {
+    void viewCart() {
         
         // 가독성용 임시 변수
         List<ProductMenu> tempList = order.getCart().getCurrentCartList();

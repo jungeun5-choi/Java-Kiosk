@@ -2,20 +2,21 @@ public class Order {
 
     /* 필드 */
     MenuRepository menuRepository; // 메인, 상품
-    Cart cart = new Cart(); // 장바구니
-    WaitingNumber waitingNumber = new WaitingNumber(); // 대기번호
+    Cart cart; // 장바구니
+    WaitingNumber waitingNumber; // 대기번호
 
     float price = 0;
 
 
     /* 생성자 */
     Order() {
-        menuRepository = new MenuRepository();
-    }
-    Order(float price) {
-        this.price = price;
-    }
+         // 생성하면서 초기화
+        this.menuRepository = new MenuRepository();
+        this.cart = new Cart();
+        this.waitingNumber = new WaitingNumber();
 
+        this.price = 0;
+    }
 
     /* 메서드 */
 

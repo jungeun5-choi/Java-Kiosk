@@ -2,11 +2,13 @@ import java.util.*;
 
 public class MenuRepository {
 
-    // 메인메뉴
+    /* 필드 */
+
+    // 1. 메인메뉴
     private List<MainMenu> mainMenuList = new ArrayList<>();
 
-    // 상품메뉴
-    List<ProductMenu> productMenuList = new ArrayList<>();
+    // 2. 상품메뉴
+    private List<ProductMenu> productMenuList = new ArrayList<>();
     private Map<String, List<ProductMenu>> productMenuMap = new HashMap<>();
 
 

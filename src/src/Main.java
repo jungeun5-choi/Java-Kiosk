@@ -2,15 +2,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // 장바구니 출력 테스트
+        // 메인에서 객체 생성 후 생성자로 전달
         Order order = new Order();
-        Screen screen = new Screen();
+        Screen screen = new Screen(order);
+        Kiosk kiosk = new Kiosk(order, screen);
 
-        order.addProductToCart(order.getRepo().getProduct("Burgers", 0));
-        order.addProductToCart(order.getRepo().getProduct("Burgers", 1));
-        order.addProductToCart(order.getRepo().getProduct("Burgers", 2));
-
-        screen.viewCart(order);
+        // 키오스크 진입
+        kiosk.startKiosk();
     }
 }
 
