@@ -1,5 +1,6 @@
 import java.util.*;
 
+/// Viewer
 public class Screen {
 
     private Order order;
@@ -11,13 +12,12 @@ public class Screen {
         sc = new Scanner(System.in);
     }
 
-    // Viewer
-
 
     // 1-1. 메인 조회
     public int viewMainMenu(){
 
         /* 상단메뉴 [ SHAKESHACK MENU ] */
+
         System.out.printf("\"SHAKESHACK BURGER 에 오신걸 환영합니다.\"\n");
         System.out.printf("아래 상품메뉴판을 보시고 상품을 골라 입력해주세요.\n\n");
 
@@ -152,5 +152,19 @@ public class Screen {
         // 현재 대기번호 출력
         System.out.printf("대기번호는 [ %d ] 번 입니다.\n", waitingNumber);
         System.out.printf("(3초 후 메뉴판으로 돌아갑니다...)\n\n");
+    }
+
+    // 5. 취소
+    public int viewCancel() {
+
+        System.out.printf("주문을 취소하시겠습니까?\n");
+        System.out.printf("1. 예 \t 2. 아니오\n\n");
+
+        /* 선택 */
+        System.out.printf("선택: ");
+
+        // (입력 값 - 1)에 해당하는 상품 반환, index는 0부터 시작이므로.
+        int select = sc.nextInt() - 1;
+        return select;
     }
 }

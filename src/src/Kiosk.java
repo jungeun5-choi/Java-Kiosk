@@ -83,7 +83,13 @@ public class Kiosk {
 
                 case 5: // Cancel
                     {
-                        System.out.printf("Cancel\n\n");
+                        // ### Q. 취소하시겠습니까?
+                        int selectCancel = screen.viewCancel();
+
+                        // ### A. 예
+                        if(selectCancel == 0) {
+                            order.clearCart();
+                        }
 
                         // ### 메인으로 돌아가기
                         selectMain = screen.viewMainMenu();
