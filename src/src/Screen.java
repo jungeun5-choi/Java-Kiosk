@@ -30,7 +30,7 @@ public class Screen {
         int i = 0;
         for(; i < mainMenus.size(); i++) {
 
-            System.out.printf("%d. %-15s | %s \n",
+            System.out.printf("%d. %-25s | %s \n",
                     i+1, mainMenus.get(i).getName(), mainMenus.get(i).getExplain());
         }
         System.out.printf("\n"); // 한줄띄우기
@@ -61,7 +61,7 @@ public class Screen {
         // 출력
         for(int i = 0; i < productMenus.size(); i++) {
 
-            System.out.printf("%d. %-15s | %.1f | %s \n",
+            System.out.printf("%d. %-25s | W %.1f | %s \n",
                     i+1, productMenus.get(i).getName(),
                     productMenus.get(i).getPrice(), productMenus.get(i).getExplain());
         }
@@ -71,8 +71,16 @@ public class Screen {
         // (입력 값 - 1)에 해당하는 상품 반환, index는 0부터 시작이므로.
         int select = sc.nextInt() - 1;
 
+        // 값을 벗어나면
+        if(select > productMenus.size()) {
+            // 경고문을 띄우고
+            viewWarning();
+            // null 값 반환 후 종료
+            return null;
+        }
+
         // 선택한 상품을 출력해줌
-        System.out.printf("%-15s | %.1f | %s \n",
+        System.out.printf("%-25s | W %.1f | %s \n",
                 productMenus.get(select).getName(), productMenus.get(select).getPrice(),
                 productMenus.get(select).getExplain());
 
@@ -121,8 +129,9 @@ public class Screen {
         List<ProductMenu> cartList = order.getCart().getCurrentCartList();
         for(int i = 0; i < cartList.size(); i++) {
 
-            System.out.printf("%-15s | %.1f | %s \n",
-                    cartList.get(i).getName(), cartList.get(i).getPrice(), cartList.get(i).getExplain());
+            System.out.printf("%-25s | W %.1f | %s \n",
+                    cartList.get(i).getName(), cartList.get(i).getPrice(),
+                    cartList.get(i).getExplain());
 
             // 가격 총합 계산
             sum += cartList.get(i).getPrice();
@@ -142,7 +151,10 @@ public class Screen {
         return select;
     }
 
-    // 3-1. 장바구니 초기화
+    // 3-1. 장바구니 비어있음
+    public void viewCartIsEmpty() {
+        System.out.printf("장바구니가 비어있습니다.\n\n");
+    }
 
     // 4. 대기번호 전달(호출?)
     public void viewWaitingNumber(int waitingNumber) {
@@ -167,4 +179,11 @@ public class Screen {
         int select = sc.nextInt() - 1;
         return select;
     }
+
+    // 6. 경고: 선택지를 잘못 입력했을 때
+    public void viewWarning() {
+
+        System.out.printf("값을 다시 입력해주세요.\n\n");
+    }
+
 }

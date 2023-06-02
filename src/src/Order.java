@@ -5,7 +5,7 @@ public class Order {
     private Cart cart; // 장바구니
     private WaitingNumber waitingNumber; // 대기번호
 
-    float price = 0;
+    private float price = 0;
 
 
     /* 생성자 */

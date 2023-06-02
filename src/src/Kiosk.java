@@ -24,21 +24,25 @@ public class Kiosk {
     private void processKiosk() {
         //System.out.printf("process Kiosk 진입완료\n");
 
-        // ### 메인메뉴 진입
         // ### 참고 ### selectMain = (입력값 - 1) 이다.
-        int selectMain = screen.viewMainMenu();
+        int selectMain  = 0;
+        int mainSize = order.getRepo().getMainMenuList().size();
 
         while (true) {
-            switch (selectMain) {
-                // ### 메인 메뉴 선택 시
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                {
-                    // ### 1. 상품 메뉴 호출 후,
-                    String mainMenuName = order.getRepo().getMainMenuName(selectMain); // 메인메뉴 이름
-                    ProductMenu product = screen.viewProductMenu(mainMenuName);
+            // ### 메인메뉴 진입
+            selectMain = screen.viewMainMenu();
+
+            // 입력값이 등록된 메인메뉴 개수보다 적거나 같음
+            //  = 메인메뉴를 선택했다! 는 뜻
+            // ### PRODUCT MENU ####
+            if (selectMain < mainSize) {
+
+                // ### 1. 상품 메뉴 호출 후,
+                String mainMenuName = order.getRepo().getMainMenuName(selectMain); // 메인메뉴 이름
+                // 장바구니에 넣을 상품 반환
+                ProductMenu product = screen.viewProductMenu(mainMenuName);
+
+                if (product != null) {
 
                     // ### 2. 장바구니 상품 추가 확인 메세지 출력
                     int selectCart = screen.confirmAddingProductToCart();
@@ -46,21 +50,24 @@ public class Kiosk {
                     screen.cartSelectionConfirmed(selectCart, product);
 
                     // ### 4. 장바구니에 물건 추가 (추가한다고 했을 때만)
-                    if(selectCart == 0) {
+                    if (selectCart == 0) {
                         order.addProductToCart(product);
-
-                        // ### 메인으로 돌아가기
-                        selectMain = screen.viewMainMenu();
                     }
-
-                    break;
                 }
-                case 4: // Order
+
+            // ### ORDER ####
+            } else if (selectMain == mainSize) {
+                // 입력값 == 메인사이즈
+                //  = Order를 선택했다! 는 뜻
+
+                // 장바구니에 뭐가 들어있을 때만
+                if(order.getCart().getCurrentCartList().size() > 0)
+                {
                     // ### 장바구니 조회
                     int selectCart = screen.viewCart();
 
                     // ### 1. 주문 선택 시
-                    if(selectCart == 0) {
+                    if (selectCart == 0) {
 
                         // ### 2. 카트 비우기
                         order.clearCart();
@@ -75,33 +82,27 @@ public class Kiosk {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
-                        // ### 메인으로 돌아가기
-                        selectMain = screen.viewMainMenu();
                     }
-                    break;
+                // 장바구니에 아무것도 없을 때
+                } else {
+                    screen.viewCartIsEmpty();
+                }
 
-                case 5: // Cancel
-                    {
-                        // ### Q. 취소하시겠습니까?
-                        int selectCancel = screen.viewCancel();
+            // ### CANCEL ####
+            } else if (selectMain == mainSize + 1){
+                // 입력값 == 메인사이즈 + 1
+                //  = Cancel를 선택했다! 는 뜻
 
-                        // ### A. 예
-                        if(selectCancel == 0) {
-                            order.clearCart();
-                        }
+                // ### Q. 취소하시겠습니까?
+                int selectCancel = screen.viewCancel();
 
-                        // ### 메인으로 돌아가기
-                        selectMain = screen.viewMainMenu();
-                    }
-                    break;
-
-                default:
-                    selectMain = screen.viewMainMenu();
-                    break;
+                // ### A. 예
+                if(selectCancel == 0) {
+                    order.clearCart();
+                }
+            } else { // 범위 바깥
+                screen.viewWarning();
             }
         }
-
-
     }
 }
