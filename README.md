@@ -1,7 +1,7 @@
 # Java 키오스크 기능 구현 프로젝트
 > 🍀 [TIL 일일회고 #1](https://velog.io/@temprmn/TIL-12%EC%9D%BC%EC%B0%A8#%EA%B5%AC%EC%A1%B0-%EC%84%A4%EA%B3%84-2)<br>
 > 🍀 [TIL 일일회고 #2](https://velog.io/@temprmn/TIL-13%EC%9D%BC%EC%B0%A8)<br>
-> 🍀 [TIL 일일회고 #3] 작성중 <br>
+> 🍀 [TIL 일일회고 #3](https://velog.io/@temprmn/TIL-14%EC%9D%BC%EC%B0%A8) <br>
 
 ## 목차
 * [프로젝트 개요](#프로젝트-개요)
